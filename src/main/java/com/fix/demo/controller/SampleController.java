@@ -1,4 +1,4 @@
-package com.fix.demo.others;
+package com.fix.demo.controller;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
@@ -20,11 +20,6 @@ public class SampleController {
     @ResponseBody
     String sample2() {
         return "Hello sample secured!";
-    }
-
-
-    public String getErrorPath() {
-        return "/error";
     }
 
 }
