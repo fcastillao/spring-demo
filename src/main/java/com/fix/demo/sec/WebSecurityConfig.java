@@ -13,20 +13,30 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    /**
+     * this method configures which endpoints will be accessible
+     * out of the box, and which ones will need login
+     * @param http
+     * @throws Exception
+     */
+    //TODO: figure out about the login and logout issues
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/sample" ).permitAll()
+                .antMatchers("/sample").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .permitAll()
                 .and()
                 .logout()
+                .logoutSuccessUrl("/sample")
                 .permitAll();
     }
 
+    //TODO: use the H2 database as auth
     @Bean
     @Override
     public UserDetailsService userDetailsService() {

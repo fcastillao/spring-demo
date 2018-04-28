@@ -1,21 +1,26 @@
 package com.fix.demo.controller;
 
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@EnableAutoConfiguration(exclude = {ErrorMvcAutoConfiguration.class})
 public class SampleController {
 
+    /**
+     * find endpoint, not secured
+     * @return the find string
+     */
     @RequestMapping("/sample")
     @ResponseBody
     String sample() {
         return "Hello sample!";
     }
 
+    /**
+     * find endpoint, secured via user pass
+     * @return the find string + secured
+     */
     @RequestMapping("/sample2")
     @ResponseBody
     String sample2() {
