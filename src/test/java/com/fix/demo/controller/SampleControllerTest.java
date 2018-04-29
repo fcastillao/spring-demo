@@ -31,11 +31,11 @@ public class SampleControllerTest {
     @Test
     public void loginWithValidUserThenAuthenticated() throws Exception {
         FormLoginRequestBuilder login = formLogin()
-                .user("user")
-                .password("password");
+                .user("admin")
+                .password("root");
 
         mockMvc.perform(login)
-                .andExpect(authenticated().withUsername("user"));
+                .andExpect(authenticated().withUsername("admin"));
     }
 
     /**
