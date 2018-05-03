@@ -27,7 +27,7 @@ public class UserController {
      */
     @RequestMapping(value = "/user", method = GET)
     @ResponseBody
-    UserDTO findUser(@RequestParam(value = "id", required = false, defaultValue = "X") String id) {
+    public UserDTO findUser(@RequestParam(value = "id", required = false, defaultValue = "X") String id) {
         return userService.findById(id);
     }
 
@@ -38,7 +38,7 @@ public class UserController {
      */
     @RequestMapping(value = "/users", method = GET)
     @ResponseBody
-    Iterable<UserDTO> users() {
+    public Iterable<UserDTO> users() {
         return userService.findAll();
     }
 
@@ -51,8 +51,8 @@ public class UserController {
      */
     @RequestMapping(value = "/user2", method = PUT)
     @ResponseBody
-    UserDTO saveUser(@RequestParam(value = "user", required = true) String username,
-                     @RequestParam(value = "pass", required = true) String pass) {
+    public UserDTO saveUser(@RequestParam(value = "user") String username,
+                            @RequestParam(value = "pass") String pass) {
         User user = new User(username, pass);
         return userService.save(user);
     }

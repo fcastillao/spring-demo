@@ -3,7 +3,6 @@ package com.fix.demo.config.sec;
 import com.fix.demo.persistence.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -37,23 +36,8 @@ public class UserDetailsServiceImp implements UserDetailsService {
             return null; //trow ex here
         }
         List<GrantedAuthority> role_name = new ArrayList<>();
-        User user = new User(byUsername.getUsername(),
+        return new User(byUsername.getUsername(),
                 byUsername.getPassword(), true, true,
                 true, true, role_name);
-        return user;
-    }
-
-    /**
-     * This method casts the roles from a String List to a GrantedAuthority List to construct the User
-     *
-     * @param roles name of the role
-     * @return the level of authority for the admin
-     */
-    private List<GrantedAuthority> getAuthorities(List<String> roles) {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        for (String role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role));
-        }
-        return authorities;
     }
 }
