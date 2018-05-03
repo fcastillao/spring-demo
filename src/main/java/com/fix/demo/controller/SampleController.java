@@ -14,7 +14,7 @@ public class SampleController {
      */
     @RequestMapping("/sample")
     @ResponseBody
-    String sample() {
+    public String sample() {
         return "Hello sample!";
     }
 
@@ -25,7 +25,7 @@ public class SampleController {
      */
     @RequestMapping("/sample2")
     @ResponseBody
-    String sample2() {
+    public String sample2() {
         return "Hello sample secured!";
     }
 

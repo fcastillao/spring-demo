@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class UserControllerTest {
 
-    UserService mockService = mock(UserService.class);
+    private UserService mockService = mock(UserService.class);
 
     @Autowired
     private MockMvc mockMvc;
@@ -39,23 +39,31 @@ public class UserControllerTest {
     /**
      * if i am logged in, i should be able to query for the admin user
      *
-     * @throws Exception
+     * @throws Exception the exception the MockMvc can throw
      */
     @Test
     @WithMockUser
     public void loggedFindUser() throws Exception {
-        mockMvc.perform(get("/user").param("id", "X"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("{\"id\":\"X\",\"username\":\"admin\"}"));
+        MvcResult mvcResult = mockMvc.perform(get("/user").param("id", "X"))
+                .andExpect(status().isOk()).andReturn();
+
+        assertEquals("{\"id\":\"X\",\"username\":\"admin\"}", mvcResult.getResponse().getContentAsString());
     }
 
     @Test
     @WithMockUser
-    public void users() throws Exception {
-        mockMvc.perform(get("/users"))
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+    public void usersShouldReturnAppJson() throws Exception {
+        MvcResult mvcResult = mockMvc.perform(get("/users"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8)).andReturn();
+
+        assertEquals("[{\"id\":\"X\",\"username\":\"admin\"}]", mvcResult.getResponse().getContentAsString());
     }
 
+    /**
+     * i should be able to save an user via the api
+     *
+     * @throws Exception the exception the MockMvc can throw
+     */
     @Test
     @WithMockUser
     public void saveUser() throws Exception {
