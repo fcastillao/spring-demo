@@ -26,20 +26,22 @@ public class SampleControllerTest {
 
     /**
      * trying to log in with good creds should log in correctly
+     *
      * @throws Exception
      */
     @Test
     public void loginWithValidUserThenAuthenticated() throws Exception {
         FormLoginRequestBuilder login = formLogin()
-                .user("user")
-                .password("password");
+                .user("admin")
+                .password("root");
 
         mockMvc.perform(login)
-                .andExpect(authenticated().withUsername("user"));
+                .andExpect(authenticated().withUsername("admin"));
     }
 
     /**
      * trying to log in with bad creds should be unauth
+     *
      * @throws Exception
      */
     @Test
@@ -54,6 +56,7 @@ public class SampleControllerTest {
 
     /**
      * sample should give 200 http
+     *
      * @throws Exception
      */
     @Test
@@ -64,6 +67,7 @@ public class SampleControllerTest {
 
     /**
      * /hello should redirect to login
+     *
      * @throws Exception
      */
     @Test
@@ -75,6 +79,7 @@ public class SampleControllerTest {
 
     /**
      * if i am logged in i should be ok on sample 2
+     *
      * @throws Exception
      */
     @Test
@@ -85,7 +90,8 @@ public class SampleControllerTest {
     }
 
     /**
-     *the sample endpoint should be accessible and return the sample string
+     * the sample endpoint should be accessible and return the sample string
+     *
      * @throws Exception
      */
     @Test

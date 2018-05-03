@@ -9,6 +9,7 @@ public class SampleController {
 
     /**
      * find endpoint, not secured
+     *
      * @return the find string
      */
     @RequestMapping("/sample")
@@ -19,6 +20,7 @@ public class SampleController {
 
     /**
      * find endpoint, secured via user pass
+     *
      * @return the find string + secured
      */
     @RequestMapping("/sample2")

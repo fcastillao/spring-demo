@@ -1,22 +1,26 @@
-package com.fix.demo.sec;
+package com.fix.demo.config.sec;
 
-import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private PasswordEncoderImp passwordEncoderImp;
+
+    @Autowired
+    private UserDetailsServiceImp userDetailsServiceImp;
+
     /**
      * this method configures which endpoints will be accessible
      * out of the box, and which ones will need login
+     *
      * @param http
      * @throws Exception
      */
@@ -36,17 +40,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
     }
 
-    //TODO: use the H2 database as auth
-    @Bean
-    @Override
-    public UserDetailsService userDetailsService() {
-        UserDetails user =
-                User.withDefaultPasswordEncoder()
-                        .username("user")
-                        .password("password")
-                        .roles("USER")
-                        .build();
 
-        return new InMemoryUserDetailsManager(user);
+    /**
+     * This method validates the user login.
+     *
+     * @param auth Authenticator
+     * @throws Exception if the authentication fails
+     */
+    @Override
+    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsServiceImp).passwordEncoder(passwordEncoderImp);
     }
 }
