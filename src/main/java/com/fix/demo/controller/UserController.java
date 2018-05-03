@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 @Controller
 public class UserController {
@@ -48,10 +49,10 @@ public class UserController {
      * @param pass     the password of the user defaults to defps
      * @return the saved user, without password
      */
-    @RequestMapping(value = "/user2", method = GET)
+    @RequestMapping(value = "/user2", method = PUT)
     @ResponseBody
-    UserDTO saveUser(@RequestParam(value = "user", required = false, defaultValue = "def") String username,
-                     @RequestParam(value = "pass", required = false, defaultValue = "defps") String pass) {
+    UserDTO saveUser(@RequestParam(value = "user", required = true) String username,
+                     @RequestParam(value = "pass", required = true) String pass) {
         User user = new User(username, pass);
         return userService.save(user);
     }

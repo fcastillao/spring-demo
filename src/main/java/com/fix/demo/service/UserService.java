@@ -14,11 +14,11 @@ import java.util.Optional;
 public class UserService {
 
     @Autowired
-    UserRepository repository;
+    private UserRepository repository;
 
     public UserDTO findByUsername(String username) {
         User user = repository.findByUsername(username);
-        if (user == null) return new UserDTO();
+        if (user == null) return null;
         return new UserDTO(user);
     }
 
@@ -39,6 +39,6 @@ public class UserService {
 
     public UserDTO findById(String id) {
         Optional<User> byId = repository.findById(id);
-        return byId.map(UserDTO::new).orElseGet(UserDTO::new);
+        return byId.map(UserDTO::new).orElse(null);
     }
 }
