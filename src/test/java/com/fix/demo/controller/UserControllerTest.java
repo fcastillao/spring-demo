@@ -14,13 +14,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
+import javax.transaction.Transactional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -66,12 +66,11 @@ public class UserControllerTest {
      */
     @Test
     @WithMockUser
+    @Transactional
     public void saveUser() throws Exception {
 
         UserDTO dto = new UserDTO("4028818a632413a801632413b7290000", "newuser");
         User user = new User("newuser", "newpass");
-
-        when(mockService.save(user)).thenReturn(dto);
 
         MvcResult mvcResult = mockMvc.perform(put("/user2")
                 .param("user", "newuser")
