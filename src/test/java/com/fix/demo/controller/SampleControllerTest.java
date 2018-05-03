@@ -27,7 +27,7 @@ public class SampleControllerTest {
     /**
      * trying to log in with good creds should log in correctly
      *
-     * @throws Exception
+     * @throws Exception default exception for mockMvc
      */
     @Test
     public void loginWithValidUserThenAuthenticated() throws Exception {
@@ -42,7 +42,7 @@ public class SampleControllerTest {
     /**
      * trying to log in with bad creds should be unauth
      *
-     * @throws Exception
+     * @throws Exception default exception for mockMvc
      */
     @Test
     public void loginWithInvalidUserThenUnauthenticated() throws Exception {
@@ -57,7 +57,7 @@ public class SampleControllerTest {
     /**
      * sample should give 200 http
      *
-     * @throws Exception
+     * @throws Exception default exception for mockMvc
      */
     @Test
     public void accessUnsecuredResourceThenOk() throws Exception {
@@ -68,7 +68,7 @@ public class SampleControllerTest {
     /**
      * /hello should redirect to login
      *
-     * @throws Exception
+     * @throws Exception default exception for mockMvc
      */
     @Test
     public void accessSecuredResourceUnauthenticatedThenRedirectsToLogin() throws Exception {
@@ -80,7 +80,7 @@ public class SampleControllerTest {
     /**
      * if i am logged in i should be ok on sample 2
      *
-     * @throws Exception
+     * @throws Exception default exception for mockMvc
      */
     @Test
     @WithMockUser
@@ -92,7 +92,7 @@ public class SampleControllerTest {
     /**
      * the sample endpoint should be accessible and return the sample string
      *
-     * @throws Exception
+     * @throws Exception default exception for mockMvc
      */
     @Test
     public void sampleIsOpen() throws Exception {
@@ -102,7 +102,7 @@ public class SampleControllerTest {
 
     /***
      * trying to access sample 2 should redirect to login (302 redirection)
-     * @throws Exception
+     * @throws Exception default exception for mockMvc
      */
     @Test
     public void sample2RedirectsToLogin() throws Exception {
