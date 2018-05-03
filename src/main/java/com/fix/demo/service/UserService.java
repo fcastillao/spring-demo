@@ -28,7 +28,7 @@ public class UserService {
         for (User user : all) {
             users.add(new UserDTO(user));
         }
-        if (users.isEmpty())return null;
+        if (users.isEmpty()) return null;
         return users;
     }
 

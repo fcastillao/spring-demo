@@ -20,17 +20,19 @@ public class UserController {
     /**
      * this method queries for a user ID, if no value
      * is specified, then queries for X
+     *
      * @param id the ID of the user you want to query
      * @return returns the user without the password
      */
     @RequestMapping(value = "/user", method = GET)
     @ResponseBody
-    UserDTO findUser(@RequestParam(value = "id",required = false, defaultValue = "X") String id) {
+    UserDTO findUser(@RequestParam(value = "id", required = false, defaultValue = "X") String id) {
         return userService.findById(id);
     }
 
     /**
      * lists all users
+     *
      * @return a list of all users without their passwords
      */
     @RequestMapping(value = "/users", method = GET)
@@ -41,14 +43,15 @@ public class UserController {
 
     /**
      * saves a user in the DB
+     *
      * @param username the username, defaults to def
-     * @param pass the password of the user defaults to defps
+     * @param pass     the password of the user defaults to defps
      * @return the saved user, without password
      */
     @RequestMapping(value = "/user2", method = GET)
     @ResponseBody
-    UserDTO saveUser(@RequestParam(value = "user",required = false, defaultValue = "def") String username,
-                    @RequestParam(value = "pass",required = false, defaultValue = "defps") String pass) {
+    UserDTO saveUser(@RequestParam(value = "user", required = false, defaultValue = "def") String username,
+                     @RequestParam(value = "pass", required = false, defaultValue = "defps") String pass) {
         User user = new User(username, pass);
         return userService.save(user);
     }

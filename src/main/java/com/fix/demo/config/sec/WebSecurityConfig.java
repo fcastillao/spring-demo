@@ -6,14 +6,13 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private PasswordEncoderImp passwordEncoderImp;
 
     @Autowired
     private UserDetailsServiceImp userDetailsServiceImp;
@@ -21,6 +20,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * this method configures which endpoints will be accessible
      * out of the box, and which ones will need login
+     *
      * @param http
      * @throws Exception
      */
@@ -28,8 +28,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .cors().and()
                 .authorizeRequests()
                 .antMatchers("/sample").permitAll()
                 .anyRequest().authenticated()
@@ -39,8 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutSuccessUrl("/sample")
-                .permitAll()
-                .and().httpBasic();
+                .permitAll();
     }
 
 
@@ -52,6 +49,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsServiceImp);
+        auth.userDetailsService(userDetailsServiceImp).passwordEncoder(passwordEncoderImp);
     }
 }

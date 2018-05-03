@@ -11,9 +11,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Component
-public class PasswordEncoderImp implements PasswordEncoder{
+public class PasswordEncoderImp implements PasswordEncoder {
 
-    private static final Logger logger = Logger.getLogger( PasswordEncoderImp.class.getName() );
+    private static final Logger logger = Logger.getLogger(PasswordEncoderImp.class.getName());
 
 
     @Override
@@ -46,9 +46,9 @@ public class PasswordEncoderImp implements PasswordEncoder{
             }
             generatedPassword = sb.toString();
         } catch (NoSuchAlgorithmException e) {
-            logger.log(Level.ALL,"Couldn't find the algorithm to encrypt the password", e);
+            logger.log(Level.ALL, "Couldn't find the algorithm to encrypt the password", e);
         } catch (UnsupportedEncodingException e) {
-            logger.log(Level.ALL,"Couldn't encode the String to UTF-8", e);
+            logger.log(Level.ALL, "Couldn't encode the String to UTF-8", e);
         }
 
         return generatedPassword;
@@ -60,7 +60,7 @@ public class PasswordEncoderImp implements PasswordEncoder{
      * @param saltSeed the seed to use for the random generator
      * @return Random String;
      */
-    public String generateSalt(int saltSeed) {
+    private String generateSalt(int saltSeed) {
         Random rgn = new Random(saltSeed);
         StringBuilder saltBuilder = new StringBuilder();
 

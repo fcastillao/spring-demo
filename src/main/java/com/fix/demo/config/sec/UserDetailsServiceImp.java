@@ -7,11 +7,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -35,14 +33,13 @@ public class UserDetailsServiceImp implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) {
         com.fix.demo.logic.user.User byUsername = userRepository.findByUsername(username);
         if (byUsername == null) {
-            System.out.println("No user found with username: ");
+            System.out.println("No user found with username: " + username);
             return null; //trow ex here
         }
+        List<GrantedAuthority> role_name = new ArrayList<>();
         User user = new User(byUsername.getUsername(),
                 byUsername.getPassword(), true, true,
-                true, true, getAuthorities(Collections.singletonList("user")));
-        //System.out.println(user.toString());
-        //System.out.println(byUsername.toString()+ "   "+byUsername.getPassword());
+                true, true, role_name);
         return user;
     }
 
