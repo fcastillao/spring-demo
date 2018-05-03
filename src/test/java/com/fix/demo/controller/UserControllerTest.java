@@ -1,8 +1,5 @@
 package com.fix.demo.controller;
 
-import com.fix.demo.logic.user.User;
-import com.fix.demo.logic.user.UserDTO;
-import com.fix.demo.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +17,6 @@ import java.util.regex.Pattern;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -30,8 +26,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 public class UserControllerTest {
-
-    private UserService mockService = mock(UserService.class);
 
     @Autowired
     private MockMvc mockMvc;
@@ -68,9 +62,6 @@ public class UserControllerTest {
     @WithMockUser
     @Transactional
     public void saveUser() throws Exception {
-
-        UserDTO dto = new UserDTO("4028818a632413a801632413b7290000", "newuser");
-        User user = new User("newuser", "newpass");
 
         MvcResult mvcResult = mockMvc.perform(put("/user2")
                 .param("user", "newuser")
