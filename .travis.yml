@@ -21,10 +21,13 @@ deploy:
     repo: fcastillao/spring-demo
     branch: master
     tags: true
-
 before_install:
   - sudo apt-get install jq
   - wget https://github.com/codacy/codacy-coverage-reporter/releases/download/4.0.5/codacy-coverage-reporter-4.0.5-assembly.jar
 
 after_success:
   - java -jar codacy-coverage-reporter-4.0.5-assembly.jar report -l Java -r JacocoReportDir/test/jacocoTestReport.xml
+
+env:
+  global:
+    secure: gkFubWSk6Ch3Oaou/28lWY1N03qihG+VddzBqT9JdxWBVntWNKo5xjj57p10k4Yg9NHVh6W5z6f97xZXA6B0UchpN8oizp+gu8W1RWcatnvSwWOlBeCBzgs3TTg+ih8fjLAwOJhRXssgGvyUokIAK3N6fa+NlIgifJIe1PpGOTy/Wm7c/vgFxnRoocUFRmHsPGfC8Rkyy/e4TYJzt7cnDrgA29O/JJZz0d2VhHVAyJCcUp8Xf7yzuAjuoJsWrRHunxum+Q4I3u9cw+YNSKc42ORrNZOF4yKegzqciGbXe2GH79xxJKUenuq1zdI4XBVkzwQYDLZHHhmut9ou7suMGzAPfxu5EV9jeu7blfIzvNG2fvRvMc6OQgRlkK0Lg1ka5KQnaeEby3Gkxt/MLgHeqUpdL4kvAG0N/BzORwb4p8S1YNy9g6mor7qt1d0/zXjqjb+ysWoE8NknuwHfRxD0MzuVoTAguYlLNJUa9kcjvfdYP/tSI5j9JngKkEG+FNUvDOHtluVQ1hvCHGhZL6k1U0tCV+u11uajMwfTLff1X1Wh2bcfuhV21mHZLy7fh5Tf0d0j5pyGwALScgWueJXvxmv9nPIMqhLzDOWBPLgMVBc5z5OYFXmiYFZUWORhDOFaBR9GabP9w/fYPli/vXJbz6apOrOTVqqpwoT3Yx7Dy3w=
