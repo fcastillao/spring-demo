@@ -12,6 +12,7 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'jacoco'
 
 
 repositories {
@@ -35,3 +36,10 @@ dependencies {
     runtime group: 'com.h2database', name: 'h2', version: '1.4.196'
 
 }
+
+jacoco {
+    toolVersion = "0.8.2"
+    reportsDir = file("JacocoReportDir")
+}
+
+tasks.check.dependsOn(jacocoTestReport)
