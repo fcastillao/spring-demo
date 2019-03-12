@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
         com.fix.demo.logic.user.User byUsername = userRepository.findByUsername(username);
         if (byUsername == null) {
             System.out.println("No user found with username: " + username);
-            return null; //trow ex here
+            throw new UsernameNotFoundException("username provided not found in DB");
         }
         List<GrantedAuthority> role_name = new ArrayList<>();
         return new User(byUsername.getUsername(),
