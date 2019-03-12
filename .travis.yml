@@ -1,10 +1,35 @@
 language: java
-
-
+os:
+  - linux
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
   directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
+stages:
+- compile
+- test
+- name: deploy
+
+deploy:
+  provider: releases
+  api_key: $GITHUB_TOKEN
+  file: build/libs/spring-demo.jar
+  skip_cleanup: true
+  draft: true
+
+before_deploy:
+  # Set up git user name and tag this commit
+  - export COMMITTER_EMAIL="$(git log -1 $TRAVIS_COMMIT --pretty="%cE")"
+  - export AUTHOR_NAME="$(git log -1 $TRAVIS_COMMIT --pretty="%aN")"
+  - git config --local user.name $AUTHOR_NAME
+  - git config --local user.email $COMMITTER_EMAIL
+  - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
+  - git tag $TRAVIS_TAG
+
+
+env:
+  matrix:
+    secure: B90SEE1mEKenrVKUlbQzUu4Lj/L1p2wM+UHK7dd/d7G3zzxLx5LqRSmcEL95KXM5b4wYqKICeY849mkSjexlOMwGbgFPbzEOAnr7dHfUlOAc0m7sSM17qh8GgxL9+RxteadSV4pLzfxEtjm3IeMzepQgetX1dEvyG13eVu2yb1XOivdm7x9QSp6ntyo42k8q576TBn7nrUt9rH0SADCAry6KZKxfeA6metMrJa00uVfIkG4xRlKGXbiprca9LF+ZpsMku07hewlYflRpD2mAz7C2k9lLw0J6S2zm2Zdasd/3BPag3raKU92cQJcXokSGaKv9s7rL8PC/VOVOuHeHCH+Xjqs/Rtg6sMLWK02nQf4WyGbGO7SL2i9gZEfLuC8V6NZELn3tjEwUmrKjvh2yQDfpL61x5m9XVe2mz83Z2TDT3v7W+5se8WB7E2L3vTIUhG2rNpPODeoIL66AWnmJkX8vaIfKE5d5BtcxDRTNvW4Fj1TBaVeMoCfH2vZZjP8AADgnZoUN+bK1KzJMOjzpk5KPrRPMtYkT1Wq8i+xAwBx1xp7HnsQDjjOGAJQUALKJhGyWb18IaRMocoMUnLr+TaAcMm7hunFUaTus8RsfQFVMJx0gjhEAbKWUQnUCG+JBmCZ9+9coMrEi6H51FKtdOGjbrQoOVkAy22XKk5eFEC4=
