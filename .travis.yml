@@ -1,10 +1,23 @@
 language: java
-
-
+os:
+- linux
 before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
   directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
+stages:
+- compile
+- test
+- name: deploy
+deploy:
+  provider: releases
+  api_key:
+    secure: F0tS6wloF0ggabfipAczyexJrh7hHiAjT3hI7pWaOdgpM1mCy4VVMAFOs+hdIbmfMCu2InHJ/ry0CSn6NUZDh9HkuIbCbFvcIWhRbt21oDcaCGi+49ULVd2mqaD1JoaD07VX+Vxq/9NKnRDyT0xSdfrmebu39XRdiVZaqaXnUyq7KnRuGpGRiCBO37Wo7RIOz1AWXpZ/1DQ5L837NOeGjar6HGpbc5BDL76W4PyXGlo6tp/T3BchUMGP809F3WsWMG9PGzmZ3rQs7wV9pI32ME9iLzCZ8MjPcDgyIYQiU0XhOrng2HoeFm7lEhFRSYiF3ZSJwwOfmH2YObXkkuXPIsmfWM6fkmWgJiRq3uSzQbxbmktoRkmwzqVeut7HrFctSXhVrHtidgzxCjEwnwIiRENGeo8ztacwzDVQkqBNYt83IINGRdM1qtWteRRuhabXA/OY0xuBd5OBI3FN4RNBw8yL76Y+2cLcp3WxHi0DF4IzSpI3UbbgrhVrGshD+D7TuaXURmtUgkH2DitNOhW9i9sc4l8Ty7jtVoDhlQf02bf9E3p7jkA8G7TyoXNtKHcdfx3HYtjRn29clJKGkvhBtlo0yJIRz9nbyg6bE32r063KAyOyPUGmUdye/0xBiXJrbYxNNDPQ+IkjvXVkbh7QMBYRJz4wjLBzFS8gbPdVFYw=
+  file: spring-demo.jar
+  on:
+    repo: fcastillao/spring-demo
+    branch: master
+    tags: true
