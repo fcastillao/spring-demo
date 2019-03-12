@@ -1,27 +1,22 @@
 language: java
 os:
-  - linux
+- linux
 before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
   directories:
-    - "$HOME/.gradle/caches/"
-    - "$HOME/.gradle/wrapper/"
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
 stages:
-  - compile
-  - test
-  - name: deploy
-
+- compile
+- test
+- name: deploy
 deploy:
   provider: releases
   api_key:
-    secure: "GbwDRXeFHNrLJEbIm17B4P4fEwNB/++bof9Uq9bHkaWslnNBV+9Yt6TIvgGgsQvX3UG4Ff0H09EVHR81juwUjB6rBJu9o+E8AvHTSZh44cU7BeBznwZGBwvSzczYhHpZpVIK3C10t6Hx3MesuKmXuO8mlzxSQe3ucpvBGNAkHp+WVspB1A3/iKrmEcERi9Zm/+3SmsMBdJTdyYmkmTNR8TGfKH+W5vssVvIErp4RVNoi0O1Ne+mmfuE3xcRhBfBtaaAX4tiYVA47OC8oMm4SnDsGCbbJhLps09cah3P0GTsA43tpv8X4wuf+173yUOc+XKLVpTRVVBg96vv+fOJc8eb6RJOZHY5qo3PyEn/+SXUCJ97chyyaFF/RtpeYmAwil2Kmvkq0kaaW3+oTHHK+3XTZPXKL5ges5sweow5W5YiyxeNzCiQ53LBsuuarS0yjHp+FlLMoLlfJnkqGcbGfYSzDUtlFPohAkz8SlkYFcvljlv8gm1d2VySi+HEsHzD/XenHjM4j939ys+Y+/UHp+ID+BlZDBVzDaIiZJBNCiz8M4NBBdHyuxlB8wih+rvLf3DPAbeRtPxiNOOdyJPaI1C1XkAda3zNdQmyvwV3t0FrUn3Q9tovrEPe1mCCdYbHdXpOcm+5nqdAVPKIA2zA22fpGMJfiB012RHvhPqxsFsI="
-  file: build/libs/spring-demo.jar
-  skip_cleanup: true
-  draft: true
+    secure: w+u48zJVx5Y5O5EUiGWfuXUtrcU/kcKlcW1csCLQLekCdaFTlK7fpMOGWKBRIR3WFu4TWxv3pSGKxQSNdKlbUDecXReCXfsZ6MmY0Gr4J/Tl8jItvY7L5+b1B1MRZZDifcykdxKw2evhsDj1jX77GAIvz/+ZdQp6c4aCh8YeRXmRMCpvenvR+9XQxz6hAIfAT2H0pTM362TN4JadTrzFBl58l01q/RBea+ahHt5WFqCkJUiS9UTNOevFWBdJTYea2XpTCaGkRw8raH4lOUvrPXKRgdOXCj4cca9y2ekewq1dFl63vPQWCucr3eRetNvRFTxJdFFdHpmnZQcjy1vjSZtiehLyaMKkN1Rya+pUhVIS2S9a+vF5KjUbx0haGP90yjY3e8E3V3cm1KR9xLaDGuhpqqxjcmKAw5eE7tXnBG3FP8aRcCLlg85RiN/sIOuXsniFUpdHmMa5bmqRi38tCbC5CbihEWnY33JDDYpM72V4QfobnZlH/xCni4ZuBqanyJGXD0DK1WRSbOUkFue9vM2iuv4MqhTC90FVkEtuu0BNpg6jcfKHVXZX5CmRfAZpdLu6iuFJKJzlzYbFq7+OFnUk1oeRSIMDcPW9s5pVVq4B+TRta5omciOoSlEiJNc1xCAUf3D5v+P7zGSStAywHaRkhW0eosiANxOx4cXQxT4=
+  file: spring-demo.jar
   on:
-    branch:
-      develop
-      master
-
+    repo: fcastillao/spring-demo
+    branch: develop
