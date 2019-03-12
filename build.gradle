@@ -41,6 +41,14 @@ dependencies {
 jacoco {
     toolVersion = "0.8.2"
     reportsDir = file("JacocoReportDir")
+    //enabling the xml only (html enabled by default)
+    jacocoTestReport {
+        reports {
+            xml.enabled true
+            csv.enabled false
+        }
+    }
+
 }
 
 //this makes the gradle check task use the jacoco test report task
