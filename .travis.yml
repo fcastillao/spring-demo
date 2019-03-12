@@ -19,4 +19,5 @@ deploy:
   file: spring-demo.jar
   on:
     repo: fcastillao/spring-demo
-    branch: develop
+    branch: master
+    tags: true
