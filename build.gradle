@@ -37,9 +37,11 @@ dependencies {
 
 }
 
+//version of the jacoco plugin and the name of the directory where the reports go
 jacoco {
     toolVersion = "0.8.2"
     reportsDir = file("JacocoReportDir")
 }
 
+//this makes the gradle check task use the jacoco test report task
 tasks.check.dependsOn(jacocoTestReport)
